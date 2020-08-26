@@ -3,7 +3,6 @@ package dev.maxtrewartha.devibe.server
 import io.javalin.Javalin
 import kotlinx.html.*
 
-
 class Server(val port: Int=7000, val address: String = "127.0.0.1"): Thread() {
 
     override fun run() {
@@ -11,16 +10,14 @@ class Server(val port: Int=7000, val address: String = "127.0.0.1"): Thread() {
         val app = Javalin.create().start(port)
 
         app.get("/"){
-            ctx -> ctx.result("Hello World")
+            println(it.queryString())
+            println(it.queryParamMap())
         }
 
     }
 }
 
 fun HTML.index() {
-    head {
-        title("Hello from Ktor!")
-    }
     body {
         div {
             +"Hello from Ktor"
