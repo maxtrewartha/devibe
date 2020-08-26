@@ -1,16 +1,8 @@
-package dev.maxtrewartha.devibe.config
+package dev.maxtrewartha.devibe.util
 
 import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.parse
 import java.io.File
-
-@Serializable
-data class Config(
-    val port: Int,
-    val topics: List<String>
-)
 
 class Kaml {
 
@@ -20,7 +12,7 @@ class Kaml {
         If config.yaml doesn't exist, we'll try and make one
          */
         if(!File("config.yaml").exists()){
-            println("config.yaml doesn't exist, creating a new file...")
+            println("Your config.yaml doesn't exist, creating a new file...")
             // I'm gonna put file operations in try/catch blocks just in case something breaks
             return try {
 
@@ -53,3 +45,9 @@ class Kaml {
     }
 
 }
+
+@Serializable
+data class Config(
+    val port: Int,
+    val topics: List<String>
+)
