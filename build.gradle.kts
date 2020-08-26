@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
     id("com.github.johnrengelman.shadow") version "6.0.0"
@@ -8,7 +7,7 @@ plugins {
     application
 }
 group = "dev.maxtrewartha"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -26,7 +25,7 @@ dependencies {
     implementation("io.javalin:javalin:3.9.1")
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
     implementation("org.slf4j:slf4j-simple:2.0.0-alpha1")
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+    //implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
 
     // Stuff for kaml (yaml)
     implementation(kotlin("stdlib", "stdlib-jdk8")) // or
@@ -38,4 +37,9 @@ tasks.withType<KotlinCompile>() {
 }
 application {
     mainClassName = "dev.maxtrewartha.devibe.MainKt"
+}
+val jar by tasks.getting(Jar::class) {
+    manifest {
+        attributes["Main-Class"] = "dev.maxtrewartha.devibe.MainKt"
+    }
 }

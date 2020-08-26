@@ -3,6 +3,7 @@ package dev.maxtrewartha.devibe.config
 import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.parse
 import java.io.File
 
 @Serializable
@@ -13,31 +14,42 @@ data class Config(
 
 class Kaml {
 
-    /*
-    This is to make sure that the config file exists
-     */
-    fun checkConfig() {
+    fun checkFiles(): Boolean{
+
         /*
-        File operations are done in catches just in case something goes wrong.
-        Idk if you have to do it in Kotlin but hey-ho
+        If config.yaml doesn't exist, we'll try and make one
          */
         if(!File("config.yaml").exists()){
-            println("config.yaml doesn't exist, would you like to make one? [y/N]")
-            // If you wanna make a dummy file
-            val ans: String? = readLine()
+            println("config.yaml doesn't exist, creating a new file...")
+            // I'm gonna put file operations in try/catch blocks just in case something breaks
+            return try {
 
-            // Intellij said this would be a good idea
-            if (ans != null) {
-                // If they say yes to making a new file
-                if (ans.toLowerCase() == "y") {
-                    val config = File("config.yaml")
-                    config.createNewFile()
-                    config.writeText("port: 7000\n" + "topics: \n" + "  - UCQvkFJEo4iLVRF41gBKycmg\n" + "  - UCqgdc8k_kS0-x9XK8wQnVVg")
-                }
-            } else {
-                println("You will have to configure devibe manually")
+                var file = File("config.yaml")
+                file.createNewFile()
+                file.writeText("port: 7000\n" + "topics: \n" + "  - UCQvkFJEo4iLVRF41gBKycmg\n" + "  - UCqgdc8k_kS0-x9XK8wQnVVg")
+                true
+
+            } catch (err: Throwable) {
+                println(err)
+                false
             }
         }
+        /*
+        If it does, we try and load the data
+         */
+        else {
+
+            val file = File("config.yaml")
+            return try{
+                Yaml.default.decodeFromString(Config.serializer(), file.readText())
+                true
+            } catch (err: Throwable){
+                println(err)
+                false
+            }
+
+        }
+
     }
 
 }
