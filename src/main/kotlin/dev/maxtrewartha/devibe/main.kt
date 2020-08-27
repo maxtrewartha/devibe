@@ -1,10 +1,8 @@
 package dev.maxtrewartha.devibe
 
 import dev.maxtrewartha.devibe.runnable.Subscribe
-import dev.maxtrewartha.devibe.util.Config
 import dev.maxtrewartha.devibe.util.Kaml
 import dev.maxtrewartha.devibe.server.Server
-import dev.maxtrewartha.devibe.util.Requests
 import dev.maxtrewartha.devibe.util.Util
 import kotlin.system.exitProcess
 
@@ -21,21 +19,25 @@ fun main(){
     // Sets some variables like the ip, port, etc
     Util.port = Kaml().getConfig().port
     Util.topics = Kaml().getConfig().topics
-    Util.ip = Requests().getIP()
+    Util.ip = Util.getIP()
 
     // A nice display to the user what IP they're gonna be using as a callback
-    println("Your IP is: " + Requests().getIP() + ", using this as your callback address")
+    println("Your IP is: " + Util.ip + ", using this as your callback address")
 
-    /*
-     This starts the server thread to receive all of the post anf get requests from youtube
-     */
-    Server().start()
+    // Attempts to start the server before resubscription
+    try{
+        /*
+        This starts the server thread to receive all of the post anf get requests from youtube
+        */
+        Server(Util.port, Util.ip).start()
 
-    /*
-    Resubscribes to current topics in the config
-     */
-    Kaml().getConfig().topics.forEach {
-        Subscribe(it).run()
+    }finally {
+        /*
+        Resubscribes to current topics in the config
+        */
+        Kaml().getConfig().topics.forEach {
+            Subscribe(it).run()
+        }
     }
 
     /*

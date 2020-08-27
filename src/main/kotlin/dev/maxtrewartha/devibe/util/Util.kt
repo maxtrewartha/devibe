@@ -1,5 +1,7 @@
 package dev.maxtrewartha.devibe.util
 
+import java.net.URL
+
 object Util{
 
     public var port: Int = 7000
@@ -8,5 +10,9 @@ object Util{
 
     val endpoint: String = "https://pubsubhubbub.appspot.com/subscribe"
     val topic: String = "https://www.youtube.com/xml/feeds/videos.xml?channel_id="
+
+    fun getIP(): String{
+        return URL("https://api.ipify.org").readText()
+    }
 
 }

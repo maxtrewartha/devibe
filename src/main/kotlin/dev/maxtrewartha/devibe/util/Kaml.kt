@@ -22,8 +22,8 @@ class Kaml {
                 file.writeText("port: 7000\n" + "topics: \n" + "  - UCQvkFJEo4iLVRF41gBKycmg\n" + "  - UCqgdc8k_kS0-x9XK8wQnVVg")
                 true
 
-            } catch (err: Throwable) {
-                println(err)
+            } catch (error: Throwable) {
+                println(error)
                 false
             }
         }
