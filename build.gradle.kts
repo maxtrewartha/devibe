@@ -12,15 +12,21 @@ version = "1.0.0"
 repositories {
     mavenCentral()
     jcenter()
-    maven {
-        url = uri("https://dl.bintray.com/kotlin/ktor")
-    }
+
     maven {
         url = uri("https://dl.bintray.com/kotlin/kotlinx")
     }
+    maven {
+        url = uri("https://jitpack.io")
+    }
+
 }
 dependencies {
     testImplementation(kotlin("test-junit"))
+
+    // For http requests
+    implementation("com.squareup.okhttp3:okhttp:4.8.1")
+
     // For the http server etc
     implementation("io.javalin:javalin:3.9.1")
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
@@ -32,7 +38,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC") // JVM dependency
     implementation("com.charleskorn.kaml:kaml:0.19.0")
 }
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 application {

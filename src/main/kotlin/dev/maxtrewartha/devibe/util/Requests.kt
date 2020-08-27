@@ -10,7 +10,6 @@ class Requests {
         return URL("https://api.ipify.org").readText()
     }
 
-
     /*
     A function to send a subscribe request to googles pubsubhubbub
      */
