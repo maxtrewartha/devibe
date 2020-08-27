@@ -32,6 +32,13 @@ fun main(){
     Server().start()
 
     /*
+    Resubscribes to current topics in the config
+     */
+    Kaml().getConfig().topics.forEach {
+        Subscribe(it).run()
+    }
+
+    /*
     An incredibly crude command system
      */
     while(true){

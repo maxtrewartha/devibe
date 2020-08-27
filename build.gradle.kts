@@ -25,7 +25,7 @@ dependencies {
     testImplementation(kotlin("test-junit"))
 
     // For http requests
-    implementation("com.squareup.okhttp3:okhttp:4.8.1")
+    implementation("com.github.kittinunf.fuel:fuel:2.2.3")
 
     // For the http server etc
     implementation("io.javalin:javalin:3.9.1")
