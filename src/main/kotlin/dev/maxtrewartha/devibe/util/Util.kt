@@ -1,6 +1,8 @@
 package dev.maxtrewartha.devibe.util
 
+import org.w3c.dom.Document
 import java.net.URL
+import javax.xml.parsers.DocumentBuilderFactory
 
 object Util{
 
@@ -13,6 +15,14 @@ object Util{
 
     fun getIP(): String{
         return URL("https://api.ipify.org").readText()
+    }
+
+    fun readXml(input: String): Document {
+        // Taken from https://www.hameister.org/KotlinXml.html
+        val dbFactory = DocumentBuilderFactory.newInstance()
+        val dBuilder = dbFactory.newDocumentBuilder()
+        val doc = dBuilder.parse(input)
+        return doc
     }
 
 }

@@ -7,18 +7,15 @@ import org.eclipse.jetty.util.ssl.SslContextFactory
 
 class Subscribe(val topic: String): Runnable{
 
+    /*
+    Need to come back to this later and fix this
+     */
+
     override fun run() {
 
-        println("Subscribing to: ${topic}")
+        println("Subscribing to: ${Util.topic}${topic} for ${Util.ip}:${Util.port}")
 
         var url = Util.endpoint
-        var payload = mapOf(
-            "hub.callback" to "http://${Util.ip}:${Util.port}",
-            "hub.topic" to "${Util.topic}${topic}",
-            "hub.verify" to "sync",
-            "hub.mode" to "subscribe",
-            "hub.lease_seconds" to "864000"
-        )
 
         // Send a post request to the endpoint
         try {
@@ -28,16 +25,16 @@ class Subscribe(val topic: String): Runnable{
             client.isFollowRedirects = true
             client.start()
 
-            val response = client.POST(url)
+            /*
+            TODO Make these requests work
+             */
+            client.newRequest(url)
+                .header("Content-Type", "application/x-www-form-urlencoded")
                 .param("hub.callback", "http://${Util.ip}:${Util.port}")
                 .param("hub.topic", "${Util.topic}${topic}")
                 .param("hub.verify", "sync")
                 .param("hub.mode", "subscribe")
-                .send()
-            /*payload.forEach {
-                response.param(it.key, it.value)
-            }*/
-            println(response.request)
+                .send(){result -> println(result.request.headers)}
 
         } catch (error: Throwable){
             println("Subscribe Failed")

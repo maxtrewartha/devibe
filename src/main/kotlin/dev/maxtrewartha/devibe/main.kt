@@ -35,9 +35,9 @@ fun main(){
         /*
         Resubscribes to current topics in the config
         */
-        Kaml().getConfig().topics.forEach {
+        /*Kaml().getConfig().topics.forEach {
             Subscribe(it).run()
-        }
+        }*/
     }
 
     /*
