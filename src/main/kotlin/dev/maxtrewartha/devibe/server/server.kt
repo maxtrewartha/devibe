@@ -23,6 +23,7 @@ class Server(private val port: Int): Thread() {
             println("POST REQUEST from ${it.ip()}")
             val input: String = it.body().trim().format("UTF-8")
             Pass(input).run()
+            it.status(202)
         }
 
     }

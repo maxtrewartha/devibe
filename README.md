@@ -1,6 +1,6 @@
 # DeVibe
 A simple youtube upload to discord webhook notifier, easy to setup (sorta)
-> Don't @ me if the code is shit, make a pull request instead :)
+> Don't @ me if my code is shit, make a pull request instead :)
 
 ## Setup
 ### Server side
@@ -32,11 +32,17 @@ There are currently no config for subscribed topics (they haven't been implmenen
 
 ## The Future
 ### Known Issues
- - When youtuber deletes a video it crashes
- - Server receives two post requests and posts to the webhook twice
+ - ~~When youtuber deletes a video it crashes~~
+ - ~~Server receives two post requests and posts to the webhook twice~~
 ### To Do
  - Send subscribe requests from the app
  - Send unsubscribe requests from the app
  - Hot swapping the server port
  - Hot swapping discord webhook url
  - Editable post notifications
+ 
+
+## Other sources
+Sources:
+XML: [https://argonrain.wordpress.com/2009/10/27/000/](https://argonrain.wordpress.com/2009/10/27/000/)  
+Discord Webhook [https://gist.github.com/k3kdude/fba6f6b37594eae3d6f9475330733bdb](https://gist.github.com/k3kdude/fba6f6b37594eae3d6f9475330733bdb)

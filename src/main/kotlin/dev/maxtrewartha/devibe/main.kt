@@ -17,7 +17,7 @@ fun main(){
 
     // Sets some variables like the ip, port, etc
     Util.port = Kaml().getConfig().port
-    Util.topics = Kaml().getConfig().topics
+    //Util.topics = Kaml().getConfig().topics
     Util.ip = Util.getIP()
     Util.webhook = Kaml().getConfig().webhook
 
@@ -51,10 +51,13 @@ fun main(){
             "subscribe" -> {
                 println("Subscribe not implemented yet!")
             }
-            "unsub" -> {}
+            "unsubscribe" -> {
+                println("Unsubscribe not implemented yet!")
+            }
+            "port" -> {
+                println("Port swapping not implemented yet!")
+            }
+            }
 
         }
     }
-
-
-}
