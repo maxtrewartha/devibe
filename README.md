@@ -38,7 +38,7 @@ There are currently no config for subscribed topics (they haven't been implmenen
  - Send subscribe requests from the app
  - Send unsubscribe requests from the app
  - Hot swapping the server port
- - Hot swapping discord webhook url
+ - ~~Hot swapping discord webhook url~~
  - Editable post notifications
  
 

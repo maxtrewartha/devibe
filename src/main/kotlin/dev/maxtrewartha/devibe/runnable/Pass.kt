@@ -40,7 +40,7 @@ class Pass(private val input: String): Runnable{
         println("$videoId / $videoTitle / $videoAuthor")
 
         // Sends the webhook
-        val webhook = DiscordWebhook(Util.webhook)
+        val webhook = DiscordWebhook(Util.config.webhook)
         webhook.setContent("*${videoAuthor}* just uploaded a new video *${videoTitle}*! Go check it out at https://www.youtube.com/watch?v=${videoId}")
         webhook.execute()
 

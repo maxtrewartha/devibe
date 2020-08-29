@@ -13,7 +13,7 @@ class Subscribe(val topic: String): Runnable{
 
     override fun run() {
 
-        println("Subscribing to: ${Util.topic}${topic} for ${Util.ip}:${Util.port}")
+        println("Subscribing to: ${Util.topic}${topic} for ${Util.ip}:${Util.config.port}")
 
         val url = Util.endpoint
 
@@ -30,7 +30,7 @@ class Subscribe(val topic: String): Runnable{
              */
             client.newRequest(url)
                 .header("Content-Type", "application/x-www-form-urlencoded")
-                .param("hub.callback", "http://${Util.ip}:${Util.port}")
+                .param("hub.callback", "http://${Util.ip}:${Util.config.port}")
                 .param("hub.topic", "${Util.topic}${topic}")
                 .param("hub.verify", "sync")
                 .param("hub.mode", "subscribe")

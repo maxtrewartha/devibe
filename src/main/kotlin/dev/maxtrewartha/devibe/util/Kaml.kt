@@ -60,11 +60,21 @@ class Kaml {
         }
     }
 
+    fun saveConfig(){
+        val file = File("config.yaml")
+        if(!file.canWrite()){
+            print("Unable to write to config :/")
+        }
+        val data = Yaml.default.encodeToString(Config.serializer(), Util.config)
+        file.writeText(data)
+        println("Saved config.")
+    }
+
 }
 
 @Serializable
 data class Config(
-    val webhook: String,
-    val port: Int,
+    var webhook: String,
+    var port: Int,
     //val topics: List<String>
 )

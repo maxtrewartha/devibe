@@ -16,10 +16,10 @@ fun main(){
     }
 
     // Sets some variables like the ip, port, etc
-    Util.port = Kaml().getConfig().port
+    Util.config.port = Kaml().getConfig().port
     //Util.topics = Kaml().getConfig().topics
     Util.ip = Util.getIP()
-    Util.webhook = Kaml().getConfig().webhook
+    Util.config.webhook = Kaml().getConfig().webhook
 
     // A nice display to the user what IP they're gonna be using as a callback
     println("Your IP is: " + Util.ip + ", using this as your callback address")
@@ -29,7 +29,7 @@ fun main(){
         /*
         This starts the server thread to receive all of the post anf get requests from youtube
         */
-        Server(Util.port).start()
+        Server(Util.config.port).start()
 
     }finally {
         /*
@@ -57,7 +57,18 @@ fun main(){
             "port" -> {
                 println("Port swapping not implemented yet!")
             }
+            "url" -> {
+                if(args[1] == null){
+                    println("No URL provided")
+                    return
+                }
+                if(args[1].startsWith("https://discordapp.com/api/webhooks/")){
+                    println("This isn't a discord webhook...")
+                    return
+                }
+                Util.config.webhook = args[1]
+                Kaml().saveConfig()
             }
-
         }
     }
+}
