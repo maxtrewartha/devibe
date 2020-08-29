@@ -12,14 +12,14 @@ class Pass(private val input: String): Runnable{
         fileData.createNewFile()
         fileData.writeText(input)
 
-        val feedData: Xml = Xml("feed.xml", "feed")
+        val feedData = Xml("feed.xml", "feed")
         val videoId: String = feedData.child("entry").child("yt:videoId").content()
         val videoTitle: String = feedData.child("entry").child("title").content()
         val videoAuthor: String = feedData.child("entry").child("author").child("name").content()
         println("$videoId / $videoTitle / $videoAuthor")
 
         // Sends the webhook
-        var webhook: DiscordWebhook = DiscordWebhook(Util.webhook)
+        val webhook = DiscordWebhook(Util.webhook)
         webhook.setContent("**${videoAuthor}** just uploaded a new video *${videoTitle}*! Go check it out at https://www.youtube.com/watch?v=${videoId}")
         webhook.execute()
 

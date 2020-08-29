@@ -1,22 +1,19 @@
 package dev.maxtrewartha.devibe.server
 
-import dev.maxtrewartha.devibe.Xml
 import dev.maxtrewartha.devibe.runnable.Pass
 import io.javalin.Javalin
-import java.beans.Beans
-import java.beans.XMLDecoder
 
-class Server(private val port: Int, val address: String): Thread() {
+class Server(private val port: Int): Thread() {
 
     override fun run() {
         //println("Javalin on thread ${Thread.currentThread().id} has started")
-        val app = Javalin.create(){it.showJavalinBanner=false}.start(port)
+        val app = Javalin.create {it.showJavalinBanner=false}.start(port)
 
         /*
         All of this should work
          */
         app.get("/"){ ctx ->
-            var challenge = ctx.queryParamMap()["hub.challenge"]?.get(0).toString()
+            val challenge = ctx.queryParamMap()["hub.challenge"]?.get(0).toString()
             println("GET REQUEST from ${ctx.ip()} with challenge: $challenge")
             ctx.html(challenge)
             ctx.status(202)
@@ -24,7 +21,7 @@ class Server(private val port: Int, val address: String): Thread() {
 
         app.post("/"){
             println("POST REQUEST from ${it.ip()}")
-            var input: String = it.body().trim().format("UTF-8")
+            val input: String = it.body().trim().format("UTF-8")
             Pass(input).run()
         }
 

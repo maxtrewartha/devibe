@@ -15,7 +15,7 @@ class Subscribe(val topic: String): Runnable{
 
         println("Subscribing to: ${Util.topic}${topic} for ${Util.ip}:${Util.port}")
 
-        var url = Util.endpoint
+        val url = Util.endpoint
 
         // Send a post request to the endpoint
         try {

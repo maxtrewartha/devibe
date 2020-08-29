@@ -1,6 +1,5 @@
 package dev.maxtrewartha.devibe
 
-import dev.maxtrewartha.devibe.runnable.Subscribe
 import dev.maxtrewartha.devibe.util.Kaml
 import dev.maxtrewartha.devibe.server.Server
 import dev.maxtrewartha.devibe.util.Util
@@ -20,6 +19,7 @@ fun main(){
     Util.port = Kaml().getConfig().port
     Util.topics = Kaml().getConfig().topics
     Util.ip = Util.getIP()
+    Util.webhook = Kaml().getConfig().webhook
 
     // A nice display to the user what IP they're gonna be using as a callback
     println("Your IP is: " + Util.ip + ", using this as your callback address")
@@ -29,7 +29,7 @@ fun main(){
         /*
         This starts the server thread to receive all of the post anf get requests from youtube
         */
-        Server(Util.port, Util.ip).start()
+        Server(Util.port).start()
 
     }finally {
         /*
@@ -44,8 +44,8 @@ fun main(){
     An incredibly crude command system
      */
     while(true){
-        var input: String? = readLine()
-        var args : List<String> = input!!.split(" ")
+        val input: String? = readLine()
+        val args : List<String> = input!!.split(" ")
         when(args[0]){
             "stop" -> exitProcess(0)
             "subscribe" -> {

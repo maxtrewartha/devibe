@@ -17,9 +17,9 @@ class Kaml {
             // I'm gonna put file operations in try/catch blocks just in case something breaks
             return try {
 
-                var file = File("config.yaml")
+                val file = File("config.yaml")
                 file.createNewFile()
-                file.writeText("port: 7000\n" + "topics: \n" + "  - UCQvkFJEo4iLVRF41gBKycmg\n" + "  - UCqgdc8k_kS0-x9XK8wQnVVg")
+                file.writeText("webhook: https://discordwebhook\n" + "port: 7000\n" + "topics: \n" + "  - UCQvkFJEo4iLVRF41gBKycmg\n" + "  - UCqgdc8k_kS0-x9XK8wQnVVg")
                 true
 
             } catch (error: Throwable) {
@@ -64,6 +64,7 @@ class Kaml {
 
 @Serializable
 data class Config(
+    val webhook: String,
     val port: Int,
     val topics: List<String>
 )
