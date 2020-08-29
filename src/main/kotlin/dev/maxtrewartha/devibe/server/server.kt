@@ -6,7 +6,7 @@ import io.javalin.Javalin
 import java.beans.Beans
 import java.beans.XMLDecoder
 
-class Server(val port: Int, val address: String): Thread() {
+class Server(private val port: Int, val address: String): Thread() {
 
     override fun run() {
         //println("Javalin on thread ${Thread.currentThread().id} has started")
