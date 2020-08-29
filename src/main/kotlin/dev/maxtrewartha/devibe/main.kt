@@ -49,9 +49,7 @@ fun main(){
         when(args[0]){
             "stop" -> exitProcess(0)
             "subscribe" -> {
-                if(args[1] != null){
-                    Subscribe(args[1]).run()
-                }
+                println("Subscribe not implemented yet!")
             }
             "unsub" -> {}
 

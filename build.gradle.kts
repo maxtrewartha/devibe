@@ -24,13 +24,9 @@ repositories {
 dependencies {
     testImplementation(kotlin("test-junit"))
 
-    // For http requests
-
     // For the http server etc
     implementation("io.javalin:javalin:3.9.1")
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
     implementation("org.slf4j:slf4j-simple:2.0.0-alpha1")
-    //implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
 
     // Stuff for kaml (yaml)
     implementation(kotlin("stdlib", "stdlib-jdk8")) // or
