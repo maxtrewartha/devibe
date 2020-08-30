@@ -61,8 +61,7 @@ fun main(){
                 if(args[1] == null){
                     println("No URL provided")
                     return
-                }
-                if(args[1].startsWith("https://discordapp.com/api/webhooks/")){
+                }else if(args[1].startsWith("https://discordapp.com/api/webhooks/")){
                     println("This isn't a discord webhook...")
                     return
                 }

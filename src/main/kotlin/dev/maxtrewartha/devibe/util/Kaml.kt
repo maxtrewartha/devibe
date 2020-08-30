@@ -64,6 +64,7 @@ class Kaml {
         val file = File("config.yaml")
         if(!file.canWrite()){
             print("Unable to write to config :/")
+            return
         }
         val data = Yaml.default.encodeToString(Config.serializer(), Util.config)
         file.writeText(data)

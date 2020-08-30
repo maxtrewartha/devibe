@@ -45,7 +45,7 @@ class Pass(private val input: String): Runnable{
         webhook.execute()
 
         // Deletes the file afterwards
-        //fileData.delete()
+        fileData.delete()
 
     }
 
