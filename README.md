@@ -32,13 +32,11 @@ There are currently no config for subscribed topics (they haven't been implmenen
 
 ## The Future
 ### Known Issues
- - ~~When youtuber deletes a video it crashes~~
- - ~~Server receives two post requests and posts to the webhook twice~~
+ - Swapping the url doesn't work
 ### To Do
  - Send subscribe requests from the app
  - Send unsubscribe requests from the app
  - Hot swapping the server port
- - ~~Hot swapping discord webhook url~~
  - Editable post notifications
  
 

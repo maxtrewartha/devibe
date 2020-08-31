@@ -6,12 +6,11 @@ import dev.maxtrewartha.devibe.util.Util
 import java.io.File
 import java.time.Duration
 import java.time.Instant
-import java.time.LocalDateTime
 
 class Pass(private val input: String): Runnable{
     override fun run() {
 
-        val filename = "feed-${LocalDateTime.now()}.xml"
+        val filename = "feed.xml"
 
         // Makes a new file
         val fileData = File(filename)
@@ -24,9 +23,17 @@ class Pass(private val input: String): Runnable{
             return
         }
 
+        // This is the simplest (and probably worst) way of substringing these
+        val publishedString: String = feedData.child("entry").child("published").content()
+        val subbedPublishedString: String  = publishedString.substring(0, publishedString.length - 6) + ".00Z"
+
+        val updatedString: String = feedData.child("entry").child("published").content()
+        val subbedUpdatedString: String  = publishedString.substring(0, updatedString.length - 6) + ".00Z"
+
         // Checks whether published is different to updated (7.5 seconds)
-        val published: Instant = Instant.parse(feedData.child("entry").child("published").content())
-        val updated: Instant = Instant.parse(feedData.child("entry").child("updated").content())
+
+        val published: Instant = Instant.parse(subbedPublishedString)
+        val updated: Instant = Instant.parse(subbedUpdatedString)
 
         val duration: Long = Duration.between(published, updated).toMillis()
         if(duration > 7500){
