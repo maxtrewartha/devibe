@@ -7,7 +7,7 @@ plugins {
     application
 }
 group = "dev.maxtrewartha"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()

@@ -58,7 +58,7 @@ fun main(){
                 println("Port swapping not implemented yet!")
             }
             "url" -> {
-                if(args[1] == null){
+                if(args.size <= 2){
                     println("No URL provided")
                     return
                 }else if(args[1].startsWith("https://discordapp.com/api/webhooks/")){

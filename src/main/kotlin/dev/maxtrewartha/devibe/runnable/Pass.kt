@@ -41,7 +41,11 @@ class Pass(private val input: String): Runnable{
 
         // Sends the webhook
         val webhook = DiscordWebhook(Util.config.webhook)
-        webhook.setContent("*${videoAuthor}* just uploaded a new video *${videoTitle}*! Go check it out at https://www.youtube.com/watch?v=${videoId}")
+        if(Util.config.useEveryone){
+            webhook.setContent("**${videoAuthor}** just uploaded a new video - $videoTitle -  Go check it out at https://www.youtube.com/watch?v=${videoId} @everyone")
+        } else {
+            webhook.setContent("**${videoAuthor}** just uploaded a new video - $videoTitle -  Go check it out at https://www.youtube.com/watch?v=${videoId}")
+        }
         webhook.execute()
 
         // Deletes the file afterwards

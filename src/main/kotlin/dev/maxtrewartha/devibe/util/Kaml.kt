@@ -19,7 +19,7 @@ class Kaml {
 
                 val file = File("config.yaml")
                 file.createNewFile()
-                file.writeText("webhook: https://discordwebhook\n" + "port: 7000\n")
+                file.writeText("webhook: https://discordwebhook\n" + "port: 7000\n" + "useEveryone: true")
                 true
 
             } catch (error: Throwable) {
@@ -77,5 +77,6 @@ class Kaml {
 data class Config(
     var webhook: String,
     var port: Int,
+    var useEveryone: Boolean
     //val topics: List<String>
 )

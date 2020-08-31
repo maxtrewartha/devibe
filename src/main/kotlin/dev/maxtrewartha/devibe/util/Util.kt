@@ -5,7 +5,7 @@ import java.net.URL
 
 object Util{
 
-    var config: Config = Config(webhook = "", port = 7000)
+    var config: Config = Config(webhook = "", port = 7000, useEveryone = true)
     //var port: Int = 7000
     //lateinit var topics: List<String>
     var ip: String = "127.0.0.1"
