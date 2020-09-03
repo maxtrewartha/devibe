@@ -16,10 +16,8 @@ fun main(){
     }
 
     // Sets some variables like the ip, port, etc
-    Util.config.port = Kaml().getConfig().port
-    //Util.topics = Kaml().getConfig().topics
+    Util.config = Kaml().getConfig()
     Util.ip = Util.getIP()
-    Util.config.webhook = Kaml().getConfig().webhook
 
     // A nice display to the user what IP they're gonna be using as a callback
     println("Your IP is: " + Util.ip + ", using this as your callback address")
@@ -48,25 +46,14 @@ fun main(){
         val args : List<String> = input!!.split(" ")
         when(args[0]){
             "stop" -> exitProcess(0)
-            "subscribe" -> {
-                println("Subscribe not implemented yet!")
-            }
-            "unsubscribe" -> {
-                println("Unsubscribe not implemented yet!")
-            }
-            "port" -> {
-                println("Port swapping not implemented yet!")
+            "sub" -> {
+
             }
             "url" -> {
-                if(args.size <= 2){
-                    println("No URL provided")
-                    return
-                }else if(args[1].startsWith("https://discordapp.com/api/webhooks/")){
-                    println("This isn't a discord webhook...")
-                    return
+                if(args.size <= 1 && args[1].startsWith("https://discordapp.com/api/webhooks/")){
+                    Util.config.webhook = args[1]
+                    Kaml().saveConfig()
                 }
-                Util.config.webhook = args[1]
-                Kaml().saveConfig()
             }
         }
     }

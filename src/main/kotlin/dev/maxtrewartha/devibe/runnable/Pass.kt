@@ -42,16 +42,16 @@ class Pass(private val input: String): Runnable{
 
         // Creating values for the webhook
         val videoId: String = feedData.child("entry").child("yt:videoId").content()
-        val videoTitle: String = feedData.child("entry").child("title").content()
+        val videoTitle: String = feedData.child("entry").child("title").content().trim()
         val videoAuthor: String = feedData.child("entry").child("author").child("name").content()
         println("$videoId / $videoTitle / $videoAuthor")
 
         // Sends the webhook
         val webhook = DiscordWebhook(Util.config.webhook)
-        if(Util.config.useEveryone){
-            webhook.setContent("**${videoAuthor}** just uploaded a new video - $videoTitle -  Go check it out at https://www.youtube.com/watch?v=${videoId} @everyone")
-        } else {
+        if(!Util.config.useEveryone){
             webhook.setContent("**${videoAuthor}** just uploaded a new video - $videoTitle -  Go check it out at https://www.youtube.com/watch?v=${videoId}")
+        } else {
+            webhook.setContent("**${videoAuthor}** just uploaded a new video - $videoTitle -  Go check it out at https://www.youtube.com/watch?v=${videoId} @everyone")
         }
         webhook.execute()
 

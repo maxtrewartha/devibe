@@ -15,31 +15,5 @@ class Subscribe(val topic: String): Runnable{
 
         println("Subscribing to: ${Util.topic}${topic} for ${Util.ip}:${Util.config.port}")
 
-        val url = Util.endpoint
-
-        // Send a post request to the endpoint
-        try {
-
-            val sslContextFactory = SslContextFactory.Client()
-            val client = HttpClient(sslContextFactory)
-            client.isFollowRedirects = true
-            client.start()
-
-            /*
-            TODO Make these requests work
-             */
-            client.newRequest(url)
-                .header("Content-Type", "application/x-www-form-urlencoded")
-                .param("hub.callback", "http://${Util.ip}:${Util.config.port}")
-                .param("hub.topic", "${Util.topic}${topic}")
-                .param("hub.verify", "sync")
-                .param("hub.mode", "subscribe")
-                .send(){result -> println(result.request.headers)}
-
-        } catch (error: Throwable){
-            println("Subscribe Failed")
-            //exitProcess(0)
-        }
-
     }
 }
