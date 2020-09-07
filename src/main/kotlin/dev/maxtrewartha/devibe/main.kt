@@ -55,6 +55,9 @@ fun main(){
                     Kaml().saveConfig()
                 }
             }
+            "save" -> {
+                Kaml().saveConfig()
+            }
         }
     }
 }

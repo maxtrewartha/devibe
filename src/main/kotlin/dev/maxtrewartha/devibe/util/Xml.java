@@ -1,4 +1,4 @@
-package dev.maxtrewartha.devibe;
+package dev.maxtrewartha.devibe.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;

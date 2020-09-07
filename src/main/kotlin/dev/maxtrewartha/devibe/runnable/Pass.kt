@@ -1,7 +1,7 @@
 package dev.maxtrewartha.devibe.runnable
 
-import dev.maxtrewartha.devibe.DiscordWebhook
-import dev.maxtrewartha.devibe.Xml
+import dev.maxtrewartha.devibe.util.DiscordWebhook
+import dev.maxtrewartha.devibe.util.Xml
 import dev.maxtrewartha.devibe.util.Util
 import java.io.File
 import java.time.Duration
