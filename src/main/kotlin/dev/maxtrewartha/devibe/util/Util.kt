@@ -5,7 +5,7 @@ import java.net.URL
 
 object Util{
 
-    var config: Config = Config(webhook = "", port = 0, useEveryone = false)
+    var config: Config = Config(webhook = "https://discord.com/api/webhooks/", port = 58410, useEveryone = false)
     var ip: String = "127.0.0.1"
 
     const val endpoint: String = "https://pubsubhubbub.appspot.com/subscribe"

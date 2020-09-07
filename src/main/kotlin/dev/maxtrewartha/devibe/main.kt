@@ -7,16 +7,8 @@ import kotlin.system.exitProcess
 
 fun main(){
 
-    // If checkFiles fails
-    if(!Kaml().checkFiles()){
-        println("Your config.yaml seems to be corrupted in some way, consider backing up and deleting it")
-        exitProcess(0)
-    } else {
-        println("Config looks good! Loading up everything now...")
-    }
-
     // Sets some variables like the ip, port, etc
-    Util.config = Kaml().getConfig()
+    Kaml().getConfig()
     Util.ip = Util.getIP()
 
     // A nice display to the user what IP they're gonna be using as a callback

@@ -7,20 +7,25 @@ import kotlin.system.exitProcess
 
 class Kaml {
 
-
-
-    fun getConfig(): Config{
+    fun getConfig() {
         // Checks to make sure the files exist
-        checkFiles()
-        try{
-            // Gets the file and returns the config
-            val file = File("config.yaml")
-            return Yaml.default.decodeFromString(Config.serializer(), file.readText())
-        } // If anything goes wrong..
-        catch (err: Throwable){
-            println("Something went wrong with getting the config file.")
-            println(err)
-            exitProcess(0)
+        val file = File("config.yaml")
+        // Makes a new default config file if it doesnt exist
+        if(!file.exists()){
+            try {
+                file.createNewFile()
+                file.writeText(Yaml.default.encodeToString(Config.serializer(), Util.config))
+            } catch (e: Throwable) {
+                println(e)
+            }
+        }
+        // If the file cant be read..
+        if(!file.canRead()){ println("Can't read the config file :/"); return}
+        // Tries to write the current config
+        try {
+            Util.config = Yaml.default.decodeFromString(Config.serializer(), file.readText())
+        } catch (e: Throwable) {
+            println("Something went wrong :/"); println(e)
         }
     }
 

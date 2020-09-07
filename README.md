@@ -1,4 +1,4 @@
-# DeVibe
+# devibe
 A simple youtube upload to discord webhook notifier, easy to setup (sorta)
 > Don't @ me if my code is shit, make a pull request instead :)
 
@@ -26,7 +26,8 @@ There is current no other commands apart from `stop` which exist the application
 All config is loaded from `config.yaml`, here is an example of what your config file looks like:
 ```yaml
 webhook: https://discordapp.com/api/webhooks/XXXXXXXXXXXXXXXXXX
-port: 7000
+port: 58410
+useEveryone: false
 ```
 There are currently no config for subscribed topics (they haven't been implmenented yet
 
