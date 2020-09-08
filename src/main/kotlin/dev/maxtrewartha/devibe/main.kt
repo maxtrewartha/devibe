@@ -1,5 +1,6 @@
 package dev.maxtrewartha.devibe
 
+import dev.maxtrewartha.devibe.runnable.Subscribe
 import dev.maxtrewartha.devibe.util.Kaml
 import dev.maxtrewartha.devibe.server.Server
 import dev.maxtrewartha.devibe.util.Util
@@ -39,7 +40,9 @@ fun main(){
         when(args[0]){
             "stop" -> exitProcess(0)
             "sub" -> {
-
+                // mmMMmm tasty formatting
+                if (args.size == 2){ Subscribe(args[1]).run() }
+                else { println("Too many args") }
             }
             "url" -> {
                 if(args.size <= 1 && args[1].startsWith("https://discordapp.com/api/webhooks/")){
@@ -49,6 +52,12 @@ fun main(){
             }
             "save" -> {
                 Kaml().saveConfig()
+            }
+            "config" -> {
+                println(" - Webhook: ${Util.config.webhook}\n - Port: ${Util.config.port}\n - Use Everyone: ${Util.config.useEveryone}")
+            }
+            "reload" -> {
+                Kaml().getConfig()
             }
         }
     }

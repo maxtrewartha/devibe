@@ -2,7 +2,6 @@ package dev.maxtrewartha.devibe.util
 
 import java.net.URL
 
-
 object Util{
 
     var config: Config = Config(webhook = "https://discord.com/api/webhooks/", port = 58410, useEveryone = false)
