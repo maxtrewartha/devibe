@@ -31,13 +31,22 @@ useEveryone: false
 ```
 There are currently no config for subscribed topics (they haven't been implmenented yet
 
+### Commands
+
+`stop` -> Stops the program  
+`sub [channelId]` -> Subscribes to a channel for the default amount of time  
+`url` -> Swaps the discord webhook url  
+`port` -> Swaps the port of the server  
+`reload` -> reloads the server  
+`save` -> Saves the config  
+`config` -> Prints out the current config  
+
+
 ## The Future
 ### Known Issues
- - Swapping the url doesn't work
 ### To Do
- - Send subscribe requests from the app
+ - Resend subscribe events when the amount of seconds is over
  - Send unsubscribe requests from the app
- - Hot swapping the server port
  - Editable post notifications
  
 

@@ -5,10 +5,10 @@ import io.javalin.Javalin
 
 class Server(private val port: Int): Thread() {
 
-    override fun run() {
-        //println("Javalin on thread ${Thread.currentThread().id} has started")
-        val app = Javalin.create {it.showJavalinBanner=false}.start(port)
+    //println("Javalin on thread ${Thread.currentThread().id} has started")
+    val app = Javalin.create {it.showJavalinBanner=false}.start(port)
 
+    fun go() {
         /*
         All of this should work
          */
@@ -26,5 +26,9 @@ class Server(private val port: Int): Thread() {
             it.status(202)
         }
 
+    }
+
+    fun shutDown() {
+        app.stop()
     }
 }

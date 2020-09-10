@@ -8,29 +8,29 @@ import kotlin.system.exitProcess
 
 fun main(){
 
+
     // Sets some variables like the ip, port, etc
     Kaml().getConfig()
-    Util.ip = Util.getIP()
+    try {
+        Util.ip = Util.getIP()
+    } catch (e: Throwable) {
+        println("Couldn't connect to ipify")
+    }
+
+    // The host variable used for changing port etc
+    var host = Server(Util.config.port)
+    host.go()
 
     // A nice display to the user what IP they're gonna be using as a callback
     println("Your IP is: " + Util.ip + ", using this as your callback address")
 
-    // Attempts to start the server before resubscription
-    try{
-        /*
-        This starts the server thread to receive all of the post anf get requests from youtube
-        */
-        Server(Util.config.port).start()
 
-    }finally {
-        /*
-        Resubscribes to current topics in the config
-        */
-        /*Kaml().getConfig().topics.forEach {
-            Subscribe(it).run()
-        }*/
+    fun reload(){
+        Kaml().saveConfig()
+        host.shutDown()
+        host = Server(Util.config.port)
+        host.go()
     }
-
     /*
     An incredibly crude command system
      */
@@ -56,8 +56,14 @@ fun main(){
             "config" -> {
                 println(" - Webhook: ${Util.config.webhook}\n - Port: ${Util.config.port}\n - Use Everyone: ${Util.config.useEveryone}")
             }
+            "port" -> {
+                if(args[1].toInt() is Int){
+                    Util.config.port = args[1].toInt()
+                    reload()
+                }
+            }
             "reload" -> {
-                Kaml().getConfig()
+                reload()
             }
         }
     }

@@ -1,5 +1,6 @@
 package dev.maxtrewartha.devibe.util
 
+import dev.maxtrewartha.devibe.server.Server
 import java.net.URL
 
 object Util{
