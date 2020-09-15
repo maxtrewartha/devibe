@@ -1,4 +1,4 @@
-package dev.maxtrewartha.devibe.util;
+package dev.maxtrewartha.devibe;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.Color;

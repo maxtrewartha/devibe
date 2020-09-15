@@ -25,35 +25,23 @@ class Subscribe(private val topic: String): Runnable{
         reqParam += "&" + URLEncoder.encode("hub.verify", "UTF-8") + "=" + URLEncoder.encode("sync", "UTF-8")
         reqParam += "&" + URLEncoder.encode("hub.mode", "UTF-8") + "=" + URLEncoder.encode("subscribe", "UTF-8")
 
-        val connection = URL(Util.endpoint)
+        val connection = URL(Util.endpoint + "?" + reqParam)
 
         try {
             with(connection.openConnection() as HttpsURLConnection) {
-                requestMethod = "POST"
-                doOutput = true
-                doInput = true
+                requestMethod = "GET"
+                println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
 
-                val write = OutputStreamWriter(outputStream)
-                write.write(reqParam)
-                write.flush()
-
-                println("URL : $url?$reqParam")
-                println("Response Code : $responseCode")
-
-                BufferedReader(InputStreamReader(inputStream)).use {
-                    val response = StringBuffer()
-
-                    var inputLine = it.readLine()
-                    while (inputLine != null) {
-                        response.append(inputLine)
-                        inputLine = it.readLine()
+                inputStream.bufferedReader().use {
+                    it.lines().forEach { line ->
+                        println(line)
                     }
-                    println("Response : $response")
                 }
 
             }
         } catch (e: Throwable) {
-            println("Couldn't subscribe :/")
+            println("Error goes as follows:")
+            println(e)
         }
     }
 }
