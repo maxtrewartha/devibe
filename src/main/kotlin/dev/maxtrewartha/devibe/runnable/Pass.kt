@@ -31,11 +31,7 @@ class Pass(private val input: String): Runnable{
         val subbedUpdatedString: String  = publishedString.substring(0, updatedString.length - 6) + ".00Z"
 
         // Checks whether published is different to updated (7.5 seconds)
-
-        val published: Instant = Instant.parse(subbedPublishedString)
-        val updated: Instant = Instant.parse(subbedUpdatedString)
-
-        val duration: Long = Duration.between(published, updated).toMillis()
+        val duration: Long = Duration.between(Instant.parse(subbedPublishedString), Instant.parse(subbedUpdatedString)).toMillis()
         if(duration > 7500){
             return
         }
@@ -49,9 +45,9 @@ class Pass(private val input: String): Runnable{
         // Sends the webhook
         val webhook = DiscordWebhook(Util.config.webhook)
         if(!Util.config.useEveryone){
-            webhook.setContent("**${videoAuthor}** just uploaded a new video - $videoTitle -  Go check it out at https://www.youtube.com/watch?v=${videoId}")
+            webhook.setContent("**${videoAuthor.trim()}** just uploaded a new video - ${videoTitle.trim()} -  Go check it out at https://www.youtube.com/watch?v=${videoId}")
         } else {
-            webhook.setContent("**${videoAuthor}** just uploaded a new video - $videoTitle -  Go check it out at https://www.youtube.com/watch?v=${videoId} @everyone")
+            webhook.setContent("**${videoAuthor.trim()}** just uploaded a new video - ${videoTitle.trim()} -  Go check it out at https://www.youtube.com/watch?v=${videoId} @everyone")
         }
         webhook.execute()
 

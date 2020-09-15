@@ -6,7 +6,7 @@ import io.javalin.Javalin
 class Server(private val port: Int): Thread() {
 
     //println("Javalin on thread ${Thread.currentThread().id} has started")
-    val app = Javalin.create {it.showJavalinBanner=false}.start(port)
+    private val app = Javalin.create {it.showJavalinBanner=false}.start(port)
 
     fun go() {
         /*

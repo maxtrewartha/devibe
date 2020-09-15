@@ -30,13 +30,13 @@ class Subscribe(private val topic: String): Runnable{
         try {
             with(connection.openConnection() as HttpsURLConnection) {
                 requestMethod = "GET"
-                println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+                println("Response Code : $responseCode $responseMessage")
 
-                inputStream.bufferedReader().use {
+                /*inputStream.bufferedReader().use {
                     it.lines().forEach { line ->
                         println(line)
                     }
-                }
+                }*/
 
             }
         } catch (e: Throwable) {
